@@ -1,11 +1,11 @@
 const Discord = require('discord.js')
 const client = new Discord.Client();
-const conf = require('./conf.json');
 const UR = require('uptime-robot');
-const ur = new UR(conf.URToken);
+const ur = new UR(process.env.URTOKEN);
+require('dotenv').configure();
 
 client.on('ready', async () => {
-    const channel = await client.channels.fetch(conf.Channel);
+    const channel = await client.channels.fetch(process.env.CHANNEL);
     try {
         await channel.bulkDelete(100);
     } catch (e) { }
@@ -32,4 +32,4 @@ async function check(msg) {
 
 
 
-client.login(conf.Token);
+client.login(process.env.TOKEN);
